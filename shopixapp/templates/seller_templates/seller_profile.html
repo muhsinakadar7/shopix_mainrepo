@@ -1,0 +1,82 @@
+{% extends 'seller_templates/base.html' %}
+{% load static %}
+
+{% block title %}Store Profile | Shopix Seller{% endblock %}
+{% block page_title %}Store Profile{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto w-full">
+
+    <!-- Profile Card -->
+    <div class="bg-white rounded-2xl border border-gray-100 p-8 mb-5">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+
+            <!-- Avatar -->
+            <div class="flex-shrink-0">
+                {% if seller.profile_image %}
+                <img src="{{ seller.profile_image.url }}" class="w-20 h-20 rounded-2xl object-cover ring-4 ring-amber-100">
+                {% else %}
+                <div class="w-20 h-20 rounded-2xl bg-amber-50 ring-4 ring-amber-100 flex items-center justify-center">
+                    <span class="material-icons-round text-amber-400 text-[36px]">store</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Info -->
+            <div class="flex-1 text-center sm:text-left">
+                <h3 class="text-xl font-black text-gray-900">{{ seller.store_name }}</h3>
+                <p class="text-sm text-gray-400 mt-0.5">{{ seller.user.email }}</p>
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-2">
+                    <span class="text-[10px] font-black text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase tracking-widest">Verified Store</span>
+                    {% if seller.store_slug %}
+                    <span class="text-[10px] font-semibold text-gray-400">@{{ seller.store_slug }}</span>
+                    {% endif %}
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Seller since {{ seller.user.date_joined|date:"Y" }}</p>
+            </div>
+
+            <a href="{% url 'edit_profile' %}"
+                class="flex-shrink-0 px-4 py-2 bg-gray-900 text-white text-xs font-bold rounded-xl hover:bg-amber-500 transition-all">
+                Edit Profile
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-4 mb-5">
+        <div class="bg-white rounded-2xl border border-gray-100 p-5 text-center">
+            <p class="text-2xl font-black text-gray-900">{{ products_count }}</p>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Products</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-100 p-5 text-center">
+            <p class="text-2xl font-black text-gray-900">0</p>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Followers</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-100 p-5 text-center">
+            <p class="text-2xl font-black text-gray-900">0.0</p>
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Rating</p>
+        </div>
+    </div>
+
+    <!-- Business Details -->
+    <div class="bg-white rounded-2xl border border-gray-100 p-6 space-y-4">
+        <p class="text-xs font-black text-gray-400 uppercase tracking-widest">Business Details</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">GST Number</p>
+                <p class="text-sm font-bold text-gray-900">{{ seller.gst_number|default:"Not Provided" }}</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">PAN Number</p>
+                <p class="text-sm font-bold text-gray-900">{{ seller.pan_number|default:"Not Provided" }}</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Bank Account</p>
+                <p class="text-sm font-bold text-gray-900">{{ seller.bank_account_number|default:"Not Provided" }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
