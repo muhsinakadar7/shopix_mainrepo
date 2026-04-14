@@ -14,12 +14,14 @@ env/
 *.pyc
 db.sqlite3
 media/
+staticfiles/
 .env
 
-# Static files
+# Migrations
+*/migrations/
 
-# Environment variables
-.env
+# Markdown
+*.md
 
 # VS Code
 .vscode/

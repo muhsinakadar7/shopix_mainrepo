@@ -1,7 +1,9 @@
 asgiref==3.11.1
-Django==6.0.2
-django-allauth
-python-dotenv
-pillow
+Django==6.0.4
+django-allauth==65.16.0
+python-dotenv==1.2.2
+pillow==12.2.0
 sqlparse==0.5.5
-tzdata==2025.3
+tzdata==2026.1
+gunicorn==25.3.0
+mysqlclient==2.2.8
